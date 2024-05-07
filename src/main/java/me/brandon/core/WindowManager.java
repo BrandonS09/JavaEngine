@@ -101,7 +101,7 @@ public class WindowManager {
         GLFW.glfwDestroyWindow(window);
     }
 
-    public void SetClearColour(float r, float g, float b, float a){
+    public void setClearColour(float r, float g, float b, float a){
         GL11.glClearColor(r,g,b,a);
     }
 
