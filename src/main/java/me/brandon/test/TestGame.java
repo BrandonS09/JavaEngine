@@ -1,6 +1,8 @@
 package me.brandon.test;
 
 import me.brandon.core.ILogic;
+import me.brandon.core.ObjectLoader;
+import me.brandon.core.entity.Model;
 import me.brandon.core.RenderManager;
 import me.brandon.core.WindowManager;
 import org.lwjgl.glfw.GLFW;
@@ -11,15 +13,32 @@ public class TestGame implements ILogic {
     private float colour = 0.0f;
 
     private final RenderManager renderer;
+    private final ObjectLoader loader;
     private final WindowManager window;
+    private Model model;
 
     public TestGame() {
         renderer = new RenderManager();
         window = Launcher.getWindow();
+        loader = new ObjectLoader();
     }
     @Override
     public void init() throws Exception {
+        renderer.init();
 
+        float[] vertices = {
+                -0.5f, 0.5f, 0f,
+                -0.5f, -0.5f, 0f,
+                0.5f, -0.5f, 0f,
+                0.5f, -0.5f, 0f,
+                0.5f, 0.5f, 0f,
+                -0.5f, 0.5f, 0f
+        };
+        int[] indices = {
+                0,1,3,
+                3,1,2
+        };
+        model = loader.loadModel(vertices, indices);
     }
 
     @Override
@@ -48,11 +67,12 @@ public class TestGame implements ILogic {
         }
 
         window.setClearColour(colour, colour, colour, 0.0f);
-        renderer.clear();
+        renderer.render(model);
     }
 
     @Override
     public void cleanup() {
         renderer.cleanup();
+        loader.cleanup();
     }
 }
