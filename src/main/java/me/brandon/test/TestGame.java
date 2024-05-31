@@ -46,7 +46,7 @@ public class TestGame implements ILogic {
                 1,0
         };
         model = loader.loadModel(vertices, textureCoords, indices);
-        model.setTexture(new Texture(loader.loadTexture("textures/grassblock.png")));
+        model.setTexture(new Texture(loader.loadTexture("C:\\Users\\Brandon Shen\\Documents\\Engine\\JavaEngine\\textures\\grassblock.png")));
     }
 
     @Override
