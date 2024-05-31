@@ -28,14 +28,15 @@ public class TestGame implements ILogic {
         renderer.init();
 
         float[] vertices = {
-                -0.5f,  0.5f, 0f,
-                -0.5f, -0.5f, 0f,
-                0.5f, -0.5f, 0f,
-                0.5f,  0.5f, 0f,
+                -0.5f, 0.5f, 0.0f,
+                -0.5f, -0.5f, 0.0f,
+                0.5f, -0.5f, 0.0f,
+                0.5f, 0.5f, 0.0f
         };
+
         int[] indices = {
-                0,1,3,
-                3,1,2
+                0, 1, 3,
+                3, 1, 2
         };
 
         float[] textureCoords = {
@@ -63,7 +64,7 @@ public class TestGame implements ILogic {
         colour += direction * .01f;
         if (colour > 1)
             colour = 1.0f;
-        else if (colour <= 0) colour = 0;
+        else if (colour <= 0) colour = 0.0f;
     }
 
     @Override
@@ -81,5 +82,7 @@ public class TestGame implements ILogic {
     public void cleanup() {
         renderer.cleanup();
         loader.cleanup();
+        window.cleanup();
+        GLFW.glfwTerminate();
     }
 }

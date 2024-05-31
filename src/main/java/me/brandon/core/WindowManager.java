@@ -99,6 +99,10 @@ public class WindowManager {
 
     public void cleanup(){
         GLFW.glfwDestroyWindow(window);
+        GLFWErrorCallback errorCallback = GLFW.glfwSetErrorCallback(null);
+        if(errorCallback != null) {
+            errorCallback.free();
+        }
     }
 
     public void setClearColour(float r, float g, float b, float a){
