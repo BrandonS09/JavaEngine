@@ -5,6 +5,7 @@ import me.brandon.core.ObjectLoader;
 import me.brandon.core.entity.Model;
 import me.brandon.core.RenderManager;
 import me.brandon.core.WindowManager;
+import me.brandon.core.entity.Texture;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 
@@ -27,18 +28,24 @@ public class TestGame implements ILogic {
         renderer.init();
 
         float[] vertices = {
-                -0.5f, 0.5f, 0f,
+                -0.5f,  0.5f, 0f,
                 -0.5f, -0.5f, 0f,
                 0.5f, -0.5f, 0f,
-                0.5f, -0.5f, 0f,
-                0.5f, 0.5f, 0f,
-                -0.5f, 0.5f, 0f
+                0.5f,  0.5f, 0f,
         };
         int[] indices = {
                 0,1,3,
                 3,1,2
         };
-        model = loader.loadModel(vertices, indices);
+
+        float[] textureCoords = {
+                0,0,
+                0,1,
+                1,1,
+                1,0
+        };
+        model = loader.loadModel(vertices, textureCoords, indices);
+        model.setTexture(new Texture(loader.loadTexture("textures/grassblock.png")));
     }
 
     @Override
