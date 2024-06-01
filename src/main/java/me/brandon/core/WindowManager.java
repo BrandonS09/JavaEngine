@@ -9,11 +9,11 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryUtil;
 
+import static me.brandon.core.util.Constants.Z_NEAR;
+import static me.brandon.core.util.Constants.Z_FAR;
+
 public class WindowManager {
     public static final float FOV = (float) Math.toRadians(60);
-    public static final float Z_NEAR = .01f;
-    public static final float Z_FAR = 1000f;
-
     public final String title;
     public int width, height;
     private long window;

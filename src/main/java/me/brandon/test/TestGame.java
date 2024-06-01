@@ -4,12 +4,15 @@ import me.brandon.core.*;
 import me.brandon.core.entity.Entity;
 import me.brandon.core.entity.Model;
 import me.brandon.core.entity.Texture;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 
+import static me.brandon.core.util.Constants.CAMERA_STEP;
+import static me.brandon.core.util.Constants.MOUSE_SENSITIVITY;
+
 public class TestGame implements ILogic {
-    private static final float CAMERA_MOVE_SPEED = 0.05f;
     private final RenderManager renderer;
     private final ObjectLoader loader;
     private final WindowManager window;
@@ -105,8 +108,13 @@ public class TestGame implements ILogic {
     }
 
     @Override
-    public void update() {
-        camera.movePosition(cameraInc.x * CAMERA_MOVE_SPEED, cameraInc.y * CAMERA_MOVE_SPEED, cameraInc.z * CAMERA_MOVE_SPEED);
+    public void update(float interval, MouseInput mouseInput) {
+        camera.movePosition(cameraInc.x * CAMERA_STEP, cameraInc.y * CAMERA_STEP, cameraInc.z * CAMERA_STEP);
+
+        if(mouseInput.isRightButtonPress()){
+            Vector2f rotVec = mouseInput.getDisplVec();
+            camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
+        }
 
         entity.incRotation(0.0f, 0.05f, 0.0f);
     }
