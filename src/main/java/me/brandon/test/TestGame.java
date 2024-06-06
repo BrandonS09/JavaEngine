@@ -32,7 +32,7 @@ public class TestGame implements ILogic {
         renderer.init();
 
         Model model = loader.loadOBJModel("/models/stanford-bunny.obj");
-        model.setTexture(new Texture(loader.loadTexture("C:\\Users\\Brandon Shen\\Documents\\Engine\\JavaEngine\\textures\\grassblock.png")));
+        model.setTexture(new Texture(loader.loadTexture("C:\\Users\\Brandon Shen\\Documents\\Engine\\JavaEngine\\textures\\grassblock.png")), 1f);
         entity = new Entity(model, new Vector3f(0,0,-5), new Vector3f(0,0,0), 1);
     }
 
@@ -48,9 +48,9 @@ public class TestGame implements ILogic {
         if(window.isKeyPressed(GLFW.GLFW_KEY_D))
             cameraInc.x = 1;
         if(window.isKeyPressed(GLFW.GLFW_KEY_Q))
-            cameraInc.y = -1;
+            cameraInc.y = -.1f;
         if(window.isKeyPressed(GLFW.GLFW_KEY_E))
-            cameraInc.y = 1;
+            cameraInc.y = .1f;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class TestGame implements ILogic {
             camera.moveRotation(rotVec.x * MOUSE_SENSITIVITY, rotVec.y * MOUSE_SENSITIVITY, 0);
         }
 
-        entity.incRotation(0.0f, 0.05f, 0.0f);
+        entity.incRotation(0.0f, 0.0025f, 0.0f);
     }
 
     @Override
@@ -71,8 +71,6 @@ public class TestGame implements ILogic {
             GL11.glViewport(0,0, window.getWidth(), window.getHeight());
             window.setResize(true);
         }
-
-        window.setClearColour(0.0f, 0.0f, 0.0f, 0.0f);
         renderer.render(entity, camera);
     }
 

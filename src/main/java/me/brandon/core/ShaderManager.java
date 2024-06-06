@@ -1,5 +1,6 @@
 package me.brandon.core;
 
+import me.brandon.core.entity.Material;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -60,8 +61,24 @@ public class ShaderManager {
         GL20.glUniform1i(uniforms.get(uniformName), value);
     }
 
+    public void setUniform(String uniformName, Material material){
+        setUniform(uniformName + ".ambient", material.getAmbientColor());
+        setUniform(uniformName + ".diffuse", material.getDiffuseColor());
+        setUniform(uniformName + ".specular", material.getSpecularColor());
+        setUniform(uniformName + ".hasTexture", material.hasTexture() ? 1 : 0);
+        setUniform(uniformName + ".reflectance", material.getReflectance());
+    }
+
     public void createVertexShader(String shaderCode) throws Exception{
         vertexShaderID = createShader(shaderCode, GL20.GL_VERTEX_SHADER);
+    }
+
+    public void createMaterialUniform(String uniformName) throws Exception {
+        createUniform(uniformName + ".ambient");
+        createUniform(uniformName + ".diffuse");
+        createUniform(uniformName + ".specular");
+        createUniform(uniformName + ".hasTexture");
+        createUniform(uniformName + ".reflectance");
     }
 
     public void createFragmentShader(String shaderCode) throws Exception{
