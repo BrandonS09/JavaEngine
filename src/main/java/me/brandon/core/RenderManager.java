@@ -2,6 +2,7 @@ package me.brandon.core;
 
 import me.brandon.core.entity.Entity;
 import me.brandon.core.entity.Model;
+import me.brandon.core.lighting.DirectionalLight;
 import me.brandon.core.util.Transformation;
 import me.brandon.core.util.Utils;
 import me.brandon.test.Launcher;
@@ -11,6 +12,7 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import static me.brandon.core.util.Constants.AMBIENT_LIGHT;
+import static me.brandon.core.util.Constants.SPECULAR_POWER;
 
 public class RenderManager {
 
@@ -32,8 +34,10 @@ public class RenderManager {
         shader.createUniform("viewMatrix");
         shader.createUniform("ambientLight");
         shader.createMaterialUniform("material");
+        shader.createUniform("specularPower");
+        shader.createDirectionalLightUniform("directionalLight");
     }
-    public void render(Entity entity, Camera camera){
+    public void render(Entity entity, Camera camera, DirectionalLight directionalLight){
         clear();
         shader.bind();
         shader.setUniform("textureSampler", 0);
@@ -42,6 +46,8 @@ public class RenderManager {
         shader.setUniform("viewMatrix", Transformation.getViewMatrix(camera));
         shader.setUniform("material", entity.getModel().getMaterial());
         shader.setUniform("ambientLight", AMBIENT_LIGHT);
+        shader.setUniform("specularPower", SPECULAR_POWER);
+        shader.setUniform("directionalLight", directionalLight);
         GL30.glBindVertexArray(entity.getModel().getId());
         GL20.glEnableVertexAttribArray(0);
         GL20.glEnableVertexAttribArray(1);

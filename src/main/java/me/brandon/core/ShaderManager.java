@@ -1,6 +1,7 @@
 package me.brandon.core;
 
 import me.brandon.core.entity.Material;
+import me.brandon.core.lighting.DirectionalLight;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -68,9 +69,20 @@ public class ShaderManager {
         setUniform(uniformName + ".hasTexture", material.hasTexture() ? 1 : 0);
         setUniform(uniformName + ".reflectance", material.getReflectance());
     }
+    public void setUniform(String uniformName, DirectionalLight directionalLight){
+        setUniform(uniformName + ".colour", directionalLight.getColour());
+        setUniform(uniformName + ".direction", directionalLight.getDirection());
+        setUniform(uniformName + ".intensity", directionalLight.getIntensity());
+    }
 
     public void createVertexShader(String shaderCode) throws Exception{
         vertexShaderID = createShader(shaderCode, GL20.GL_VERTEX_SHADER);
+    }
+
+    public void createDirectionalLightUniform(String uniformName) throws Exception{
+        createUniform(uniformName + ".colour");
+        createUniform(uniformName + ".direction");
+        createUniform(uniformName + ".intensity");
     }
 
     public void createMaterialUniform(String uniformName) throws Exception {

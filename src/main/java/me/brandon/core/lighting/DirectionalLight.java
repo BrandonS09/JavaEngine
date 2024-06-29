@@ -3,21 +3,21 @@ package me.brandon.core.lighting;
 import org.joml.Vector3f;
 
 public class DirectionalLight {
-    public Vector3f color, direction;
-    public float intensity;
+    private Vector3f colour, direction;
+    private float intensity;
 
-    public DirectionalLight(Vector3f color, Vector3f direction, float intensity) {
-        this.color = color;
+    public DirectionalLight(Vector3f colour, Vector3f direction, float intensity) {
+        this.colour = colour;
         this.direction = direction;
         this.intensity = intensity;
     }
 
-    public Vector3f getColor() {
-        return color;
+    public Vector3f getColour() {
+        return colour;
     }
 
-    public void setColor(Vector3f color) {
-        this.color = color;
+    public void setColour(Vector3f color) {
+        this.colour = color;
     }
 
     public Vector3f getDirection() {
